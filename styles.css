@@ -1,0 +1,832 @@
+/* GSC Business Intelligence Tool - Design Moderno e Bellissimo */
+/* Made with love by Maria Paloschi */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Design Moderno - Colori Eleganti */
+    --bg-main: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-dark: #1a1a2e;
+    --bg-card: #16213e;
+    --bg-light: #0f3460;
+    
+    /* Pulsanti Bellissimi */
+    --btn-primary: linear-gradient(45deg, #00d2ff 0%, #3a7bd5 50%, #ff6b9d 100%);
+    --btn-secondary: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    --btn-success: linear-gradient(45deg, #11998e 0%, #38ef7d 100%);
+    --btn-danger: linear-gradient(45deg, #ff6b9d 0%, #ffd93d 100%);
+    
+    /* Testi Eleganti */
+    --text-white: #ffffff;
+    --text-light: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-accent: #3a7bd5;
+    
+    /* Effetti */
+    --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --shadow-strong: 0 20px 40px rgba(0, 0, 0, 0.3);
+    --glow: 0 0 30px rgba(58, 123, 213, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-main);
+    color: var(--text-white);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Container Principale */
+.container {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 40px;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    box-shadow: var(--shadow-strong);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Header Spettacolare */
+header {
+    text-align: center;
+    padding: 60px 30px;
+    margin-bottom: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b9d 100%);
+    border-radius: 25px;
+    box-shadow: var(--shadow-strong);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+header h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
+    letter-spacing: -2px;
+}
+
+header .subtitle {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    font-weight: 500;
+    font-style: italic;
+    position: relative;
+    z-index: 2;
+    opacity: 0.9;
+}
+
+/* Sezioni con stile moderno */
+.upload-section,
+.filters-section {
+    background: var(--bg-card);
+    border-radius: 25px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.upload-section::before,
+.filters-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--btn-primary);
+    border-radius: 25px 25px 0 0;
+}
+
+/* Stili input eleganti */
+.upload-row,
+.filters-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.upload-item label,
+.filter-item label {
+    display: block;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.upload-item input[type="file"],
+.filter-item select,
+.filter-item input {
+    width: 100%;
+    padding: 18px 25px;
+    background: var(--bg-dark);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    color: var(--text-white);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.upload-item input[type="file"]:focus,
+.filter-item select:focus,
+.filter-item input:focus {
+    outline: none;
+    border-color: var(--text-accent);
+    box-shadow: var(--glow);
+    background: var(--bg-light);
+}
+
+/* PULSANTI BELLISSIMI - PERFETTI PER LAYOUT 3+1 */
+button, .btn {
+    background: var(--btn-primary);
+    color: var(--text-white);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin: 6px;
+    box-shadow: 0 15px 35px rgba(58, 123, 213, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    white-space: nowrap;
+    flex: 0 1 auto;
+    min-width: 180px;
+    max-width: 220px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+}
+
+button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 25px 50px rgba(58, 123, 213, 0.5);
+    background: var(--btn-secondary);
+}
+
+button:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Tabs Moderne */
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 25px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    box-shadow: var(--shadow-soft);
+}
+
+.tab-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 15px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    margin: 5px;
+    font-size: 1rem;
+}
+
+.tab-btn.active {
+    background: var(--btn-primary);
+    color: var(--text-white);
+    box-shadow: var(--shadow-soft);
+    border-color: transparent;
+    transform: scale(1.05);
+}
+
+.tab-btn:hover:not(.active) {
+    background: var(--bg-light);
+    color: var(--text-white);
+    border-color: var(--text-accent);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    background: var(--bg-card);
+    border-radius: 25px;
+    padding: 50px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-content.active {
+    display: block;
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(50px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Titoli delle sezioni */
+.analysis-section h2,
+.filters-section h3 {
+    color: var(--text-white);
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    background: var(--btn-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    letter-spacing: -1px;
+}
+
+/* GRAFICI - ENORMI E BELLISSIMI */
+.charts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin: 50px 0;
+}
+
+.chart-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-light) 100%);
+    border-radius: 25px;
+    padding: 60px;
+    box-shadow: var(--shadow-strong);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    min-height: 800px;
+    position: relative;
+}
+
+.chart-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--btn-primary);
+    border-radius: 25px 25px 0 0;
+}
+
+.chart-card h3 {
+    color: var(--text-white);
+    margin-bottom: 40px;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* CANVAS SUPER ENORMI E LEGGIBILISSIMI */
+.chart-card canvas {
+    width: 100% !important;
+    height: 850px !important;
+    margin: 50px 0;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 40px !important;
+    border: 3px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Statistiche Bellissime */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin: 50px 0;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, var(--btn-success) 0%, var(--btn-primary) 100%);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: var(--shadow-strong);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 30px 60px rgba(58, 123, 213, 0.4);
+}
+
+.stat-card:hover::before {
+    transform: rotate(45deg) scale(1.2);
+}
+
+.stat-value {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--text-white);
+    margin-bottom: 15px;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.stat-label {
+    color: var(--text-white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+    opacity: 0.9;
+}
+
+/* Tabelle Eleganti */
+.table-container {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 40px 0;
+    overflow-x: auto;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-white);
+}
+
+table th {
+    background: var(--btn-primary);
+    color: var(--text-white);
+    padding: 20px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+table td {
+    padding: 18px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+table tr:hover {
+    background: var(--bg-light);
+    transform: scale(1.01);
+}
+
+/* Insights Box */
+.insights-box {
+    background: var(--bg-dark);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 40px;
+    box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.insights-box h4 {
+    color: var(--text-accent);
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.insights-box p,
+.insights-box li {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+/* Footer Elegante */
+footer {
+    text-align: center;
+    padding: 60px 40px;
+    margin-top: 60px;
+    background: linear-gradient(135deg, var(--btn-danger) 0%, var(--btn-primary) 100%);
+    border-radius: 25px;
+    box-shadow: var(--shadow-strong);
+}
+
+footer p {
+    color: var(--text-white);
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-style: italic;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 25px;
+    }
+    
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .chart-card {
+        padding: 30px;
+        min-height: 500px;
+    }
+    
+    .chart-card canvas {
+        height: 400px !important;
+    }
+    
+    .upload-row,
+    .filters-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .tabs-nav {
+        flex-direction: column;
+    }
+}
+
+/* Animazioni di caricamento */
+.loading {
+    text-align: center;
+    padding: 80px 40px;
+    color: var(--text-light);
+}
+
+.loading::before {
+    content: '';
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border: 6px solid rgba(255, 255, 255, 0.2);
+    border-top: 6px solid var(--text-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 30px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Scrollbar personalizzata */
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+    border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--btn-primary);
+    border-radius: 7px;
+    border: 2px solid var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--btn-secondary);
+}
+
+/* Selezione del testo */
+::selection {
+    background: var(--text-accent);
+    color: var(--text-white);
+}
+
+/* Focus styling */
+button:focus,
+input:focus,
+select:focus {
+    outline: 3px solid var(--text-accent);
+    outline-offset: 3px;
+}
+
+/* Utility classes */
+.text-center { text-align: center; }
+.mb-30 { margin-bottom: 30px; }
+.mt-30 { margin-top: 30px; }
+.hidden { display: none; }/* Miglioramenti specifici per i problemi segnalati */
+
+/* 1. PULSANTI - Layout 3+1 perfetto */
+.button-row,
+/* LAYOUT BOTTONI 3+1 PERFETTO */
+.filter-buttons,
+.upload-buttons,
+.tab-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin: 25px auto !important;
+    align-items: center !important;
+    max-width: 950px !important;
+}
+
+.button-row button,
+.filter-buttons button,
+.upload-buttons button {
+    flex: 0 0 auto !important;
+    min-width: 220px !important;
+    max-width: 220px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin: 6px !important;
+    padding: 16px 24px !important;
+    font-size: 0.9rem !important;
+}
+
+/* 2. GRAFICI - SUPER LEGGIBILI */
+.chart-card {
+    min-height: 800px !important;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-light) 100%) !important;
+}
+
+.chart-card canvas {
+    height: 850px !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 3px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+/* 3. TESTI NEI GRAFICI - SUPER LEGGIBILI */
+.chartjs-render-monitor {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 4. KEYWORD E LABELS - Sempre visibili */
+.chart-labels {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* 5. TOOLTIPS - Migliorati */
+.chartjs-tooltip {
+    background: rgba(0, 0, 0, 0.9) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 6. TABELLE - Testi sempre leggibili */
+table {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+}
+
+table th {
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    padding: 16px 12px !important;
+}
+
+table td {
+    padding: 14px 10px !important;
+    word-wrap: break-word !important;
+    max-width: 250px !important;
+    font-weight: 500 !important;
+}
+
+/* 7. RESPONSIVE - Pulsanti su mobile */
+@media (max-width: 768px) {
+    .button-row button,
+    .filter-buttons button {
+        min-width: 120px !important;
+        font-size: 0.85rem !important;
+        padding: 12px 20px !important;
+    }
+    
+    .chart-card canvas {
+        height: 450px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .button-row,
+    .filter-buttons {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+    
+    .button-row button,
+    .filter-buttons button {
+        width: 100% !important;
+        max-width: none !important;
+    }
+}/* EVENTI BUSINESS STAGIONALI */
+.business-events {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid var(--btn-primary);
+}
+
+.event-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 2px 4px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.event-tag.commercial {
+    background: linear-gradient(45deg, #ff6b9d, #ffd93d);
+    color: #1a1a2e;
+}
+
+.event-tag.seasonal {
+    background: linear-gradient(45deg, #11998e, #38ef7d);
+    color: #ffffff;
+}
+
+.event-tag.romantic {
+    background: linear-gradient(45deg, #ff6b9d, #ff9a9e);
+    color: #ffffff;
+}
+
+.event-tag.sales {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: #ffffff;
+}
+
+.event-tag.digital {
+    background: linear-gradient(45deg, #3a7bd5, #00d2ff);
+    color: #ffffff;
+}
+
+/* MIGLIORAMENTI TESTI GRAFICI - SUPER LEGGIBILI */
+.chartjs-render-monitor {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* =================== EVENTI STAGIONALI BUSINESS =================== */
+.seasonal-events {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border-left: 5px solid var(--btn-primary);
+}
+
+.seasonal-events h4 {
+    color: var(--text-white);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.event-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.event-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 2px;
+}
+
+.event-tag.black-friday {
+    background: linear-gradient(45deg, #1a1a1a, #ff6b9d);
+    color: #ffffff;
+}
+
+.event-tag.natale {
+    background: linear-gradient(45deg, #c41e3a, #228b22);
+    color: #ffffff;
+}
+
+.event-tag.san-valentino {
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: #ffffff;
+}
+
+.event-tag.saldi-estivi {
+    background: linear-gradient(45deg, #ff7f50, #ffd700);
+    color: #1a1a2e;
+}
+
+.event-tag.saldi-invernali {
+    background: linear-gradient(45deg, #4169e1, #87ceeb);
+    color: #ffffff;
+}
+
+.event-tag.cyber-monday {
+    background: linear-gradient(45deg, #00ced1, #1e90ff);
+    color: #ffffff;
+}

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSC Business Intelligence Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    
+    <style>
+    /* Chart.js override per migliorare leggibilità */
+    .chartjs-render-monitor {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 GSC Business Intelligence Tool</h1>
+            <p class="subtitle">Made with love by Maria Paloschi</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="upload-row">
+                <div class="upload-item">
+                    <label for="dateFile">📅 Date Performance</label>
+                    <input type="file" id="dateFile" accept=".csv" />
+                </div>
+                <div class="upload-item">
+                    <label for="countryFile">🌍 Countries</label>
+                    <input type="file" id="countryFile" accept=".csv" />
+                </div>
+                <div class="upload-item">
+                    <label for="queryFile">🔍 Queries</label>
+                    <input type="file" id="queryFile" accept=".csv" />
+                </div>
+                <div class="upload-item">
+                    <label for="pageFile">📄 Pages</label>
+                    <input type="file" id="pageFile" accept=".csv" />
+                </div>
+            </div>
+            <button id="analyzeBtn" class="analyze-btn">🚀 Avvia Analisi Business Intelligence</button>
+        </div>
+
+        <!-- Filtri Globali -->
+        <div class="filters-section">
+            <h3>🔧 Filtri Avanzati</h3>
+            <div class="filters-row">
+                <div class="filter-item">
+                    <label for="dateRange">Periodo:</label>
+                    <select id="dateRange">
+                        <option value="all">Tutti i dati</option>
+                        <option value="30">Ultimi 30 giorni</option>
+                        <option value="90">Ultimi 90 giorni</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="minImpressions">Min Impressioni:</label>
+                    <input type="number" id="minImpressions" value="10" min="1">
+                </div>
+                <div class="filter-item">
+                    <label for="minClicks">Min Click:</label>
+                    <input type="number" id="minClicks" value="1" min="0">
+                </div>
+                <div class="filter-item">
+                    <label for="deviceType">Dispositivo:</label>
+                    <select id="deviceType">
+                        <option value="all">Tutti</option>
+                        <option value="desktop">Desktop</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="tablet">Tablet</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-buttons">
+                <button onclick="applyFilters()">🔍 Applica Filtri</button>
+                <button onclick="resetFilters()">🔄 Reset</button>
+                <button onclick="exportData()">💾 Esporta</button>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs-nav">
+                <button class="tab-btn active" data-tab="trend">📈 Trend Analysis</button>
+                <button class="tab-btn" data-tab="geographic">🌍 Geographic Performance</button>
+                <button class="tab-btn" data-tab="intent">🎯 Query Intent</button>
+                <button class="tab-btn" data-tab="business">💼 Business Intelligence</button>
+                <button class="tab-btn" data-tab="opportunities">⭐ Opportunità</button>
+            </div>
+
+            <div class="tabs-content">
+                <!-- Trend Analysis Avanzata -->
+                <div class="tab-content active" id="trend">
+                    <div class="analysis-section">
+                        <h2>📈 Trend Analysis Avanzata</h2>
+                        
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <h3>📊 Stagionalità Intelligente</h3>
+                                <div class="filters">
+                                    <select id="seasonalityPeriod">
+                                        <option value="monthly">Mensile</option>
+                                        <option value="weekly">Settimanale</option>
+                                        <option value="daily">Giornaliero</option>
+                                    </select>
+                                </div>
+                                <canvas id="seasonalityChart"></canvas>
+                                <div id="seasonalityInsights" class="insights-box"></div>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>🎯 Peak Detection</h3>
+                                <canvas id="peakDetectionChart"></canvas>
+                                <div id="peakInsights" class="insights-box"></div>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>📅 Weekend vs Weekday</h3>
+                                <canvas id="weekendWeekdayChart"></canvas>
+                                <div id="weekdayInsights" class="insights-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geographic Performance -->
+                <div class="tab-content" id="geographic">
+                    <div class="analysis-section">
+                        <h2>🌍 Geographic Performance</h2>
+                        
+                        <div class="charts-grid">
+                            <div class="chart-card full-width">
+                                <h3>🗺️ Heatmap Mondiale</h3>
+                                <div class="filters">
+                                    <select id="geoMetric">
+                                        <option value="clicks">Clicks</option>
+                                        <option value="impressions">Impressioni</option>
+                                        <option value="ctr">CTR</option>
+                                    </select>
+                                    <select id="geoTopCountries">
+                                        <option value="10">Top 10</option>
+                                        <option value="20">Top 20</option>
+                                        <option value="50">Top 50</option>
+                                    </select>
+                                </div>
+                                <canvas id="geoHeatmapChart"></canvas>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>🎯 Opportunity Markets</h3>
+                                <canvas id="opportunityMarketsChart"></canvas>
+                                <div id="opportunityMarketsInsights" class="insights-box"></div>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>📊 CTR by Geography</h3>
+                                <canvas id="ctrGeographyChart"></canvas>
+                                <div id="ctrGeoInsights" class="insights-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Query Intent Classification -->
+                <div class="tab-content" id="intent">
+                    <div class="analysis-section">
+                        <h2>🎯 Query Intent Classification</h2>
+                        
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <h3>🏷️ Brand vs Non-Brand</h3>
+                                <canvas id="brandChart"></canvas>
+                                <div id="brandInsights" class="insights-box"></div>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>🛒 Commercial Intent</h3>
+                                <canvas id="commercialChart"></canvas>
+                                <div id="commercialInsights" class="insights-box"></div>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>📚 Informational Intent</h3>
+                                <canvas id="informationalChart"></canvas>
+                                <div id="informationalInsights" class="insights-box"></div>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>🔍 Navigational Intent</h3>
+                                <canvas id="navigationalChart"></canvas>
+                                <div id="navigationalInsights" class="insights-box"></div>
+                            </div>
+
+                            <div class="intent-distribution full-width">
+                                <h3>📊 Intent Distribution Overview</h3>
+                                <canvas id="intentOverviewChart"></canvas>
+                                <div class="intent-details">
+                                    <div class="intent-category">
+                                        <h4>🛒 Commercial Queries</h4>
+                                        <div id="commercialQueriesList"></div>
+                                    </div>
+                                    <div class="intent-category">
+                                        <h4>📚 Informational Queries</h4>
+                                        <div id="informationalQueriesList"></div>
+                                    </div>
+                                    <div class="intent-category">
+                                        <h4>🔍 Navigational Queries</h4>
+                                        <div id="navigationalQueriesList"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Intelligence -->
+                <div class="tab-content" id="business">
+                    <div class="analysis-section">
+                        <h2>💼 Business Intelligence</h2>
+                        
+                        <!-- KPI Dashboard -->
+                        <div class="kpi-dashboard">
+                            <div class="kpi-item">
+                                <div class="kpi-value" id="totalClicks">-</div>
+                                <div class="kpi-label">Total Clicks</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-value" id="totalImpressions">-</div>
+                                <div class="kpi-label">Total Impressions</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-value" id="avgCTR">-</div>
+                                <div class="kpi-label">Average CTR</div>
+                            </div>
+                            <div class="kpi-item">
+                                <div class="kpi-value" id="avgPosition">-</div>
+                                <div class="kpi-label">Average Position</div>
+                            </div>
+                        </div>
+
+                        <div class="charts-grid">
+                            <!-- Category Performance -->
+                            <div class="chart-card">
+                                <h3>👗 Category Performance</h3>
+                                <canvas id="categoryChart"></canvas>
+                                <div id="categoryInsights" class="insights-box"></div>
+                            </div>
+
+                            <!-- Interactive Charts Section -->
+                            <div class="chart-card">
+                                <h3>📈 Time Series Interactive</h3>
+                                <div class="filters">
+                                    <select id="timeSeriesMetric">
+                                        <option value="clicks">Clicks</option>
+                                        <option value="impressions">Impressioni</option>
+                                        <option value="ctr">CTR</option>
+                                        <option value="position">Posizione</option>
+                                    </select>
+                                    <input type="range" id="timeSeriesZoom" min="7" max="365" value="30" class="zoom-slider">
+                                    <span id="zoomLabel">30 giorni</span>
+                                </div>
+                                <canvas id="timeSeriesChart"></canvas>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>🎯 Scatter Plot Performance</h3>
+                                <canvas id="scatterChart"></canvas>
+                                <div id="scatterInsights" class="insights-box"></div>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>🌟 Sunburst Categories</h3>
+                                <canvas id="sunburstChart"></canvas>
+                            </div>
+
+                            <div class="chart-card">
+                                <h3>🕸️ Radar Performance</h3>
+                                <canvas id="radarChart"></canvas>
+                                <div id="radarInsights" class="insights-box"></div>
+                            </div>
+
+                            <div class="chart-card full-width">
+                                <h3>🔗 Sankey User Journey</h3>
+                                <canvas id="sankeyChart"></canvas>
+                                <div id="sankeyInsights" class="insights-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunità -->
+                <div class="tab-content" id="opportunities">
+                    <div class="analysis-section">
+                        <h2>⭐ Opportunità di Crescita</h2>
+                        
+                        <div class="opportunities-grid">
+                            <div class="opportunity-card">
+                                <h3>🚀 Quick Wins</h3>
+                                <div id="quickWins"></div>
+                            </div>
+                            
+                            <div class="opportunity-card">
+                                <h3>💎 High Value Opportunities</h3>
+                                <div id="highValueOpportunities"></div>
+                            </div>
+                            
+                            <div class="opportunity-card">
+                                <h3>⚠️ Priority Issues</h3>
+                                <div id="priorityIssues"></div>
+                            </div>
+                            
+                            <div class="opportunity-card">
+                                <h3>🌍 Geographic Expansion</h3>
+                                <div id="geoExpansion"></div>
+                            </div>
+                            
+                            <div class="opportunity-card">
+                                <h3>🔍 Content Gaps</h3>
+                                <div id="contentGaps"></div>
+                            </div>
+                            
+                            <div class="opportunity-card">
+                                <h3>📈 Growth Potential</h3>
+                                <div id="growthPotential"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="analyzer.js"></script>
+        <footer>
+            <p>Fatto con amore per la SEO</p>
+        </footer>
+    </div>
+
+    <script src="analyzer.js"></script>
+</body>
+</html>
